@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ReClaim It | Report Lost Item</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-deep: #020617;
+            --bg-slate: #0F172A;
+            --accent-blue: #3B82F6;
+            --text-high: #F8FAFC;
+            --text-muted: #94A3B8;
+            --glass: rgba(30, 41, 59, 0.7);
+            --border: rgba(255, 255, 255, 0.08);
+            --danger: #ef4444;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-high);
+            display: flex;
+            min-height: 100vh;
+            background-image: radial-gradient(circle at 100% 0%, rgba(59, 130, 246, 0.08) 0%, transparent 30%);
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            width: 260px;
+            background: #111827;
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            padding: 25px 20px;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+        }
+
+        .logo-container { display: flex; align-items: center; gap: 10px; margin-bottom: 30px; }
+        .logo { font-size: 22px; font-weight: 700; }
+        .logo b { color: var(--accent-blue); }
+        .app-logo { width: 30px; height: 30px; }
+
+        .menu { flex: 1; display: flex; flex-direction: column; overflow-y: auto; }
+        .menu small { color: var(--text-muted); font-size: 11px; margin: 18px 0 8px; display: block; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .menu a {
+            display: flex; align-items: center; gap: 12px; padding: 12px 15px;
+            margin-bottom: 4px; border-radius: 12px; text-decoration: none;
+            color: #CBD5E1; transition: 0.3s; font-size: 14px;
+        }
+
+        .menu a:hover { background: rgba(37, 99, 235, 0.1); color: var(--accent-blue); }
+        .menu a.active { background: var(--accent-blue); color: #fff; }
+        
+        .logout-link { margin-top: auto; color: var(--danger) !important; border: 1px solid transparent; }
+        .logout-link:hover { border-color: var(--danger); background: rgba(239, 68, 68, 0.1) !important; }
+
+        /* ===== MAIN CONTENT ===== */
+        .main-content { flex: 1; padding: 40px; display: flex; justify-content: center; overflow-y: auto; }
+
+        .form-card {
+            width: 100%;
+            max-width: 800px;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 40px;
+            border: 1px solid var(--border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .form-header { text-align: center; margin-bottom: 35px; }
+        .form-header h1 { font-size: 28px; margin-bottom: 8px; }
+        .form-header p { color: var(--text-muted); font-size: 15px; }
+
+        .section-title {
+            font-size: 14px; font-weight: 700; color: var(--accent-blue);
+            text-transform: uppercase; letter-spacing: 1px;
+            margin: 30px 0 15px; display: flex; align-items: center; gap: 10px;
+        }
+        .section-title::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+
+        .grid-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+
+        label { display: block; font-size: 13px; font-weight: 500; color: var(--text-muted); margin-bottom: 8px; }
+
+        input, select, textarea {
+            width: 100%; padding: 14px; border-radius: 12px;
+            border: 1px solid var(--border); background: rgba(15, 23, 42, 0.6);
+            color: white; font-size: 14px; transition: 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none; border-color: var(--accent-blue); background: rgba(15, 23, 42, 0.9);
+        }
+
+        .image-upload-box {
+            border: 2px dashed var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-bottom: 20px;
+        }
+
+        .image-upload-box:hover { border-color: var(--accent-blue); background: rgba(59, 130, 246, 0.05); }
+        #preview img { max-width: 100%; max-height: 250px; border-radius: 12px; margin-top: 15px; box-shadow: 0 10px 15px rgba(0,0,0,0.2); }
+
+        .form-actions { display: flex; justify-content: flex-end; gap: 15px; margin-top: 40px; }
+
+        button {
+            padding: 14px 32px; border: none; border-radius: 14px;
+            font-weight: 600; cursor: pointer; transition: 0.3s;
+        }
+
+        .btn-reset { background: transparent; color: var(--text-muted); border: 1px solid var(--border); }
+        .btn-reset:hover { background: rgba(255,255,255,0.05); color: white; }
+
+        .btn-submit { background: var(--accent-blue); color: white; box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.4); }
+        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 15px 25px -5px rgba(59, 130, 246, 0.5); }
+
+        @media (max-width: 600px) { .grid-row { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="logo-container">
+            <img src="download.svg" alt="ReClaim Logo" class="app-logo" onerror="this.style.display='none'">
+            <div class="logo">Re<b>Claim</b> It</div>
+        </div>
+
+        <nav class="menu">
+            <small>Main</small>
+            <a href="dashboard.html">📊 Dashboard</a>
+            <a href="project.html">🏠 Home</a>
+            <a href="report.html" class="active">📄 Report</a>
+            <a href="found.html">🔎 Founder</a>
+            <a href="pricing.html">💳 Payment</a>
+            <a href="item.html">📦 Item Report</a>
+          
+          
+            <small>Resources</small>
+            <a href="about.html">ℹ About</a>
+            <a href="help.html">❓ Help</a>
+
+            <small>Legal</small>
+            <a href="privacy.html">📄 Privacy Policy</a>
+            <a href="contract.html">📞 Contact</a>
+
+            <a href="login.html" class="logout-link">🚪 Logout</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        
+        <div class="form-card">
+            <div class="form-header">
+                <h1>Report Lost Item</h1>
+                <p>Fill in the details below. Our smart system will scan for matches immediately.</p>
+            </div>
+
+            <form id="lostForm">
+                <div class="section-title">Personal Details</div>
+                <div class="grid-row">
+                    <div>
+                        <label>Full Name</label>
+                        <input type="text" id="name" placeholder="John Doe" required>
+                    </div>
+                    <div>
+                        <label>Contact Number</label>
+                        <input type="tel" id="contact" placeholder="+91 00000 00000" required>
+                    </div>
+                </div>
+                <div class="grid-row">
+                    <div>
+                        <label>Email Address</label>
+                        <input type="email" id="email" placeholder="john@example.com" required>
+                    </div>
+                    <div>
+                        <label>Exact Location Where Lost</label>
+                        <input type="text" id="location" placeholder="e.g. Central Park, Block B" required>
+                    </div>
+                </div>
+
+                <div class="section-title">Item Details</div>
+                <div class="grid-row">
+                    <div>
+                        <label>Item Category</label>
+                        <select id="item" required>
+                            <option value="" disabled selected>Select category</option>
+                            <option>Mobile Phone</option>
+                            <option>Wallet/Purse</option>
+                            <option>Keys</option>
+                            <option>ID Card/Passport</option>
+                            <option>Electronic Gadget</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Primary Color</label>
+                        <select id="color" required>
+                            <option>Black</option>
+                            <option>White</option>
+                            <option>Blue</option>
+                            <option>Red</option>
+                            <option>Silver/Gray</option>
+                            <option>Brown</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid-row">
+                    <div>
+                        <label>Date Lost</label>
+                        <input type="date" id="lostDate" required>
+                    </div>
+                </div>
+
+                <label>Item Description & Unique Marks</label>
+                <textarea id="description" placeholder="Mention scratches, stickers, or specific brands..." required></textarea>
+
+                <div class="section-title">Visual Evidence</div>
+                <div class="image-upload-box" onclick="document.getElementById('image').click()">
+                    <p id="uploadText">Click to upload or drag a photo of the item</p>
+                    <input type="file" id="image" accept="image/*" hidden required>
+                    <div id="preview"></div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="reset" class="btn-reset">Clear Form</button>
+                    <button type="submit" class="btn-submit" id="submitBtn">Submit Lost Report</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        // Set maximum date to today
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('lostDate').setAttribute('max', today);
+
+        let imageData = "";
+
+        // Handle Image Preview
+        document.getElementById("image").addEventListener("change", function(){
+            const file = this.files[0];
+            if(!file) return;
+
+            document.getElementById("uploadText").innerText = "Selected: " + file.name;
+
+            const reader = new FileReader();
+            reader.onload = e => {
+                imageData = e.target.result;
+                document.getElementById("preview").innerHTML = `<img src="${imageData}" alt="Preview">`;
+            };
+            reader.readAsDataURL(file);
+        });
+
+        // Handle Form Submission
+        document.getElementById("lostForm").addEventListener("submit", function(e){
+            e.preventDefault();
+            
+            const btn = document.getElementById("submitBtn");
+            btn.innerText = "Processing...";
+            btn.disabled = true;
+            btn.style.opacity = "0.7";
+
+            const lostReport = {
+                type: "Lost",
+                name: document.getElementById("name").value,
+                email: document.getElementById("email").value,
+                contact: document.getElementById("contact").value,
+                location: document.getElementById("location").value,
+                item: document.getElementById("item").value,
+                color: document.getElementById("color").value,
+                lostDate: document.getElementById("lostDate").value,
+                description: document.getElementById("description").value,
+                image: imageData,
+                status: "Pending",
+                createdAt: new Date().toISOString()
+            };
+
+            // Save to LocalStorage
+            let reports = JSON.parse(localStorage.getItem("reports")) || [];
+            reports.push(lostReport);
+            localStorage.setItem("reports", JSON.stringify(reports));
+
+            // Small delay to simulate server processing
+            setTimeout(() => {
+                alert("Report successfully filed! Our AI is now searching for matches.");
+                window.location.href = "pricing.html";
+            }, 1200);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ReClaim It | Plans & Payment</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-deep: #020617;
+            --bg-slate: #0F172A;
+            --accent-blue: #3B82F6;
+            --text-high: #F8FAFC;
+            --text-muted: #94A3B8;
+            --glass: rgba(30, 41, 59, 0.7);
+            --border: rgba(255, 255, 255, 0.08);
+            --success: #10B981;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-high);
+            display: flex;
+            min-height: 100vh;
+            background-image: radial-gradient(circle at 100% 0%, rgba(59, 130, 246, 0.08) 0%, transparent 30%);
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            width: 260px;
+            background: #111827;
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            padding: 25px 20px;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+        }
+
+        .logo-container { display: flex; align-items: center; gap: 10px; margin-bottom: 30px; }
+        .logo { font-size: 22px; font-weight: 700; }
+        .logo b { color: var(--accent-blue); }
+        .app-logo { width: 30px; height: 30px; }
+
+        .menu { flex: 1; display: flex; flex-direction: column; }
+        .menu small { color: var(--text-muted); font-size: 11px; margin: 18px 0 8px; display: block; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .menu a {
+            display: flex; align-items: center; gap: 12px; padding: 12px 15px;
+            margin-bottom: 4px; border-radius: 12px; text-decoration: none;
+            color: #CBD5E1; transition: 0.3s; font-size: 14px;
+        }
+
+        .menu a:hover { background: rgba(37, 99, 235, 0.1); color: var(--accent-blue); }
+        .menu a.active { background: var(--accent-blue); color: #fff; }
+
+        /* ===== MAIN CONTENT ===== */
+        .main-content { flex: 1; padding: 40px; overflow-y: auto; }
+
+        .pricing-header { text-align: center; margin-bottom: 50px; }
+        .pricing-header h1 { font-size: 36px; margin-bottom: 10px; }
+        .pricing-header p { color: var(--text-muted); font-size: 18px; }
+
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .plan-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 40px;
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            transition: 0.3s ease;
+            position: relative;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-blue);
+            background: rgba(30, 41, 59, 0.9);
+        }
+
+        .plan-card.popular {
+            border: 2px solid var(--accent-blue);
+            box-shadow: 0 20px 40px -10px rgba(59, 130, 246, 0.2);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent-blue);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .plan-name { font-size: 20px; font-weight: 700; margin-bottom: 10px; }
+        .plan-price { font-size: 42px; font-weight: 800; margin-bottom: 25px; }
+        .plan-price span { font-size: 16px; color: var(--text-muted); font-weight: 400; }
+
+        .features-list { list-style: none; margin-bottom: 30px; flex: 1; }
+        .features-list li {
+            margin-bottom: 15px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #CBD5E1;
+        }
+        .features-list li::before { content: "✓"; color: var(--accent-blue); font-weight: bold; }
+
+        .btn-select {
+            padding: 14px;
+            border-radius: 14px;
+            border: none;
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .popular .btn-select { background: var(--accent-blue); }
+        .btn-select:hover { background: var(--accent-blue); transform: scale(1.02); }
+
+        /* ===== PAYMENT SECTION ===== */
+        #paymentSection {
+            max-width: 500px;
+            margin: 50px auto 0;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .qr-card {
+            background: var(--glass);
+            border-radius: 24px;
+            padding: 30px;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .qr-container {
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            width: fit-content;
+            margin: 20px auto;
+        }
+
+        .confirm-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--success);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
+            .sidebar { width: 100%; height: auto; position: relative; }
+        }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="logo-container">
+            <img src="download.svg" alt="Logo" class="app-logo" onerror="this.style.display='none'">
+            <div class="logo">Re<b>Claim</b> It</div>
+        </div>
+
+        <nav class="menu">
+            <small>Main</small>
+            <a href="dashboard.html">📊 Dashboard</a>
+            <a href="project.html">🏠 Home</a>
+            <a href="report.html">📄 Report</a>
+            <a href="found.html">🔎 Founder</a>
+            <a href="pricing.html" class="active">💳 Payment</a>
+            <a href="item.html">📦 Item Report</a>
+          
+          
+            <small>Resources</small>
+            <a href="about.html">ℹ About</a>
+            <a href="help.html">❓ Help</a>
+            <a href="login.html" style="margin-top: auto; color: #ef4444;">🚪 Logout</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <div class="pricing-header">
+            <h1>Simple, Transparent Pricing</h1>
+            <p>Choose the protection that's right for you.</p>
+        </div>
+
+        <div class="plans-grid">
+            <div class="plan-card">
+                <div class="plan-name">Basic</div>
+                <div class="plan-price">₹99<span>/month</span></div>
+                <ul class="features-list">
+                    <li>Report unlimited lost items</li>
+                    <li>Basic AI matching</li>
+                    <li>Community support access</li>
+                    <li>Standard recovery window</li>
+                </ul>
+                <button class="btn-select" onclick="showPayment('Basic', 99)">Choose Basic</button>
+            </div>
+
+            <div class="plan-card popular">
+                <div class="popular-badge">MOST POPULAR</div>
+                <div class="plan-name">Standard</div>
+                <div class="plan-price">₹199<span>/month</span></div>
+                <ul class="features-list">
+                    <li>Everything in Basic</li>
+                    <li>Instant Email & SMS alerts</li>
+                    <li>High-priority AI scanning</li>
+                    <li>Extended recovery window</li>
+                </ul>
+                <button class="btn-select" onclick="showPayment('Standard', 199)">Choose Standard</button>
+            </div>
+
+            <div class="plan-card">
+                <div class="plan-name">Premium</div>
+                <div class="plan-price">₹299<span>/month</span></div>
+                <ul class="features-list">
+                    <li>Everything in Standard</li>
+                    <li>Official Admin Verification</li>
+                    <li>Priority recovery assistance</li>
+                    <li>Detailed activity analytics</li>
+                </ul>
+                <button class="btn-select" onclick="showPayment('Premium', 299)">Choose Premium</button>
+            </div>
+        </div>
+
+        <section id="paymentSection">
+            <div class="qr-card">
+                <h2>Secure Payment</h2>
+                <p style="margin-top: 10px; color: var(--text-muted)">
+                    Plan: <b style="color: white" id="selName">None</b> | 
+                    Total: <b style="color: var(--success)" id="selPrice">₹0</b>
+                </p>
+                
+                <div class="qr-container">
+                    <img id="qrImage" src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=RECLAIM_PAYMENT_DUMMY" alt="Payment QR">
+                </div>
+                
+                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 20px;">
+                    Scan the QR code with any UPI app (GPay, PhonePe, Paytm)
+                </p>
+                
+                <button class="confirm-btn" onclick="completePayment()">I Have Completed Payment</button>
+                <button class="btn-select" style="margin-top: 10px; width: 100%;" onclick="hidePayment()">Cancel</button>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function showPayment(name, price) {
+            document.getElementById('selName').innerText = name;
+            document.getElementById('selPrice').innerText = '₹' + price;
+            
+            const paymentBox = document.getElementById('paymentSection');
+            paymentBox.style.display = 'block';
+            
+            // Scroll to payment area
+            paymentBox.scrollIntoView({ behavior: 'smooth' });
+
+            // Optional: Update QR code content based on price
+            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=RECLAIM_${name}_${price}`;
+            document.getElementById('qrImage').src = qrUrl;
+        }
+
+        function hidePayment() {
+            document.getElementById('paymentSection').style.display = 'none';
+        }
+
+        function completePayment() {
+            const btn = document.querySelector('.confirm-btn');
+            btn.innerText = "Verifying Transaction...";
+            btn.disabled = true;
+
+            setTimeout(() => {
+                alert("Payment Verified! Your account has been upgraded.");
+                window.location.href = "item.html";
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

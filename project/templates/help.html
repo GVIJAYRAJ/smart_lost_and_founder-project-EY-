@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ReClaim It | Help & Support</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-main: #020617;
+            --bg-secondary: #0F172A;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --accent: #3B82F6;
+            --success: #10B981;
+            --text: #F8FAFC;
+            --muted: #94A3B8;
+            --border: rgba(255, 255, 255, 0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+
+        body {
+            display: flex;
+            min-height: 100vh;
+            background-color: var(--bg-main);
+            color: var(--text);
+            background-image: radial-gradient(circle at 100% 0%, rgba(59,130,246,0.08), transparent 30%);
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 260px;
+            background: #111827;
+            padding: 25px 20px;
+            border-right: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .app-logo {
+            width: 32px;
+            height: 32px;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .logo b { color: var(--accent); }
+
+        .menu { flex: 1; display: flex; flex-direction: column; }
+
+        .menu small {
+            color: var(--muted);
+            font-size: 11px;
+            margin: 18px 0 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .menu a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 15px;
+            border-radius: 12px;
+            color: #CBD5E1;
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 4px;
+            transition: 0.3s;
+        }
+
+        .menu a:hover { background: rgba(59,130,246,0.1); color: var(--accent); }
+        .menu a.active { background: var(--accent); color: white; }
+
+        /* MAIN CONTENT */
+        .main-content { flex: 1; padding: 40px; overflow-y: auto; }
+
+        .header-nav { margin-bottom: 40px; }
+        .header-nav h1 { font-size: 28px; font-weight: 700; }
+        .header-nav span { color: var(--accent); }
+
+        .help-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+        }
+
+        .help-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            padding: 30px;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            transition: 0.3s ease;
+        }
+
+        .help-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .help-card h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--accent);
+        }
+
+        .help-card p, .help-card li {
+            font-size: 14px;
+            color: #CBD5E1;
+            line-height: 1.6;
+        }
+
+        .help-card ul { list-style: none; margin-top: 10px; }
+
+        .help-card ul li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .help-card ul li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .support-footer {
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(90deg, rgba(59,130,246,0.1), transparent);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .contact-info p { font-size: 14px; color: var(--muted); margin-bottom: 5px; }
+
+        .chat-btn {
+            background: var(--accent);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .chat-btn:hover { background: #2563EB; transform: scale(1.05); }
+    </style>
+</head>
+
+<body>
+
+<aside class="sidebar">
+    <div class="logo-container">
+        <img src="download.svg" alt="ReClaim It Logo" class="app-logo">
+        <div class="logo">Re<b>Claim</b> It</div>
+    </div>
+
+    <nav class="menu">
+        <small>Main</small>
+        <a href="dashboard.html">📊 Dashboard</a>
+        <a href="project.html">🏠 Home</a>
+        <a href="report.html">📄 Report</a>
+        <a href="found.html">🔎 Founder</a>
+        <a href="pricing.html">💳 Payment</a>
+        <a href="item.html">📦 Item Report</a>
+        
+
+        <small>Resources</small>
+        <a href="about.html">ℹ About</a>
+        <a href="help.html" class="active">❓ Help</a>
+        <a href="login.html" style="margin-top:auto;color:#ef4444;">🚪 Logout</a>
+    </nav>
+</aside>
+
+<main class="main-content">
+        <div class="header-nav">
+            <h1>Help & <span>Support Center</span></h1>
+        </div>
+
+        <div class="help-grid">
+            <div class="help-card">
+                <h3>📋 Reporting Items</h3>
+                <p>Follow these simple steps to list an item on the portal:</p>
+                <ul>
+                    <li>Navigate to the <b>Report</b> tab from the sidebar.</li>
+                    <li>Select whether the item is <b>Lost</b> or <b>Found</b>.</li>
+                    <li>Provide a detailed description, including color and brand.</li>
+                    <li>Upload a clear photo to increase matching accuracy by 80%.</li>
+                </ul>
+            </div>
+
+            <div class="help-card">
+                <h3>🔍 How Matching Works</h3>
+                <p>Our <b>Smart Matching Engine</b> automatically compares reports based on several data points:</p>
+                <ul>
+                    <li><b>Category & Item Name:</b> Primary matching criteria.</li>
+                    <li><b>Location:</b> Proximity of where the item was lost/found.</li>
+                    <li><b>AI Score:</b> We calculate a percentage match score.</li>
+                </ul>
+                
+            </div>
+
+            <div class="help-card">
+                <h3>🔑 Account & Security</h3>
+                <p>Managing your profile and security settings:</p>
+                <ul>
+                    <li>Your mobile number is used for OTP verification.</li>
+                    <li>You can view all your active reports in the <b>Dashboard</b>.</li>
+                    <li>If you find your item, please <b>Delete</b> the report to keep the database clean.</li>
+                </ul>
+            </div>
+
+            <div class="help-card">
+                <h3>💳 Subscription & Billing</h3>
+                <p>Understanding our service plans:</p>
+                <ul>
+                    <li><b>Basic:</b> Free reporting and manual matching.</li>
+                    <li><b>Standard:</b> Automated alerts and faster matching.</li>
+                    <li><b>Premium:</b> Admin verification and priority recovery.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="support-footer">
+            <div class="contact-info">
+                <h3>Still have questions?</h3>
+                <p>Our support team is available Monday - Friday, 9AM - 6PM.</p>
+                <p><b>Email:</b> support@reclaimit.com | <b>Phone:</b> +91 90000 00000</p>
+            </div>
+            <a href="mailto:support@reclaimit.com" class="chat-btn">Contact Support</a>
+        </div>
+    </main>
+</body>
+</html>

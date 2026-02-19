@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ReClaim It | Privacy Policy</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root{
+  --bg-main:#0b1426;
+  --bg-gradient:#0f1f3d;
+  --sidebar:#0b162b;
+  --bg-card:rgba(25,35,65,0.65);
+  --accent:#3b82f6;
+  --accent-soft:rgba(59,130,246,0.15);
+  --text:#f1f5f9;
+  --muted:#94a3b8;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:"Poppins","Segoe UI",Arial,sans-serif;
+}
+
+body{
+  display:flex;
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(59,130,246,0.25), transparent 40%),
+    linear-gradient(180deg,var(--bg-main),var(--bg-gradient));
+  color:var(--text);
+}
+
+/* SIDEBAR */
+
+.sidebar{
+  width:240px;
+  background:var(--sidebar);
+  padding:24px 20px;
+  border-right:1px solid rgba(255,255,255,0.05);
+}
+
+.logo{
+  font-size:20px;
+  font-weight:700;
+  margin-bottom:30px;
+}
+
+.logo b{
+  color:var(--accent);
+}
+
+.menu small{
+  display:block;
+  margin:18px 0 8px;
+  font-size:11px;
+  color:var(--muted);
+}
+
+.menu a{
+  display:block;
+  padding:10px 14px;
+  border-radius:10px;
+  color:#cbd5e1;
+  text-decoration:none;
+  font-size:14px;
+  margin-bottom:6px;
+  transition:0.3s;
+}
+
+.menu a:hover{
+  background:var(--accent-soft);
+  color:#fff;
+}
+
+.menu a.active{
+  background:var(--accent);
+  color:white;
+}
+
+/* MAIN */
+
+.main{
+  flex:1;
+}
+
+/* HEADER */
+
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 40px;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+  background:rgba(255,255,255,0.02);
+}
+
+.brand{
+  font-size:20px;
+  font-weight:700;
+}
+
+.brand b{
+  color:var(--accent);
+}
+
+nav a{
+  margin-left:20px;
+  text-decoration:none;
+  color:var(--muted);
+  transition:0.3s;
+}
+
+nav a:hover{
+  color:#fff;
+}
+
+/* CONTENT */
+
+.wrapper{
+  display:flex;
+  justify-content:center;
+  padding:60px 20px;
+}
+
+.card{
+  width:100%;
+  max-width:900px;
+  background:var(--bg-card);
+  backdrop-filter:blur(18px);
+  border-radius:20px;
+  padding:40px;
+  border:1px solid rgba(255,255,255,0.05);
+  box-shadow:0 20px 50px rgba(0,0,0,0.5);
+}
+
+h1{
+  font-size:30px;
+  margin-bottom:15px;
+  background:linear-gradient(90deg,#ffffff,#93c5fd);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.section{
+  margin-top:30px;
+}
+
+.section h3{
+  font-size:18px;
+  margin-bottom:10px;
+  border-left:4px solid var(--accent);
+  padding-left:12px;
+}
+
+.section p,
+.section li{
+  font-size:14px;
+  line-height:1.8;
+  color:#cbd5e1;
+}
+
+ul{
+  padding-left:20px;
+}
+
+.note{
+  margin-top:30px;
+  font-size:13px;
+  color:var(--muted);
+  border-top:1px solid rgba(255,255,255,0.08);
+  padding-top:15px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+  body{
+    flex-direction:column;
+  }
+  .sidebar{
+    width:100%;
+    border-right:none;
+    border-bottom:1px solid rgba(255,255,255,0.05);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+  <div class="logo">Re<b>Claim</b> It</div>
+  <div class="menu">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="report.html">Report</a>
+    <a href="pricing.html">Payment</a>
+    <a href="item.html">Item Report</a>
+    <a href="matching.html">Matches</a>
+
+    <small>RESOURCES</small>
+    <a href="about.html">About</a>
+    <a href="help.html">Help</a>
+
+    <small>LEGAL</small>
+    <a href="privacy.html" class="active">Privacy Policy</a>
+    <a href="user.html">User Agreement</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</div>
+
+<div class="main">
+
+<header>
+  <div class="brand">Re<b>Claim</b> It</div>
+  <nav>
+    <a href="project.html">Home</a>
+    <a href="report.html">Report</a>
+    <a href="help.html">Help</a>
+  </nav>
+</header>
+
+<div class="wrapper">
+<div class="card">
+
+<h1>Privacy Policy</h1>
+<p>Your privacy is important to us. This policy explains how ReClaim It handles user data.</p>
+
+<div class="section">
+<h3>1. Information We Collect</h3>
+<ul>
+<li>Personal details such as name, email, and phone number</li>
+<li>Login credentials and OTP authentication data</li>
+<li>Lost or found item details and uploaded images</li>
+<li>Location and report-related information</li>
+</ul>
+</div>
+
+<div class="section">
+<h3>2. How We Use Your Information</h3>
+<ul>
+<li>Processing lost and found reports</li>
+<li>Verifying user identity</li>
+<li>Supporting item recovery</li>
+<li>Improving platform functionality</li>
+</ul>
+</div>
+
+<div class="section">
+<h3>3. Data Sharing</h3>
+<p>
+Data is accessible only to authorized administrators or officials for recovery purposes.
+We do not sell or misuse user data.
+</p>
+</div>
+
+<div class="section">
+<h3>4. Payment & OTP</h3>
+<p>
+Payment and OTP features are demo-based in this academic version.
+No real financial data is stored.
+</p>
+</div>
+
+<div class="section">
+<h3>5. Security</h3>
+<p>
+We implement reasonable security practices. However, no digital system guarantees absolute protection.
+</p>
+</div>
+
+<div class="note">
+This platform is developed for academic demonstration purposes.
+</div>
+
+</div>
+</div>
+
+</div>
+
+</body>
+</html>

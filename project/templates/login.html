@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ReClaim It | Secure Access</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg-deep:#020617;
+  --bg-slate:#0F172A;
+  --accent-blue:#3B82F6;
+  --accent-green:#10B981;
+  --text-high:#F8FAFC;
+  --text-muted:#94A3B8;
+  --glass:rgba(15,23,42,0.7);
+  --border:rgba(255,255,255,0.08);
+  --transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+
+*{
+  box-sizing:border-box;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  margin:0;
+  padding:0;
+}
+
+body{
+  background:var(--bg-deep);
+  color:var(--text-high);
+  min-height:100vh;
+  background-image:
+    radial-gradient(circle at 0% 0%,rgba(59,130,246,0.1),transparent 40%);
+  overflow-x: hidden;
+}
+
+/* ===== NEW TOP NAVIGATION ===== */
+.top-nav {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  display: flex;
+  gap: 25px;
+  z-index: 100;
+}
+
+.top-nav a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.top-nav a:hover {
+  color: var(--accent-blue);
+}
+
+.admin-link {
+  background: rgba(59, 130, 246, 0.1);
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--accent-blue);
+  color: var(--accent-blue) !important;
+}
+
+.admin-link:hover {
+  background: var(--accent-blue) !important;
+  color: white !important;
+}
+
+/* ===== LAYOUT ===== */
+.container{
+  display:flex;
+  min-height:100vh;
+}
+
+/* ===== LOGIN SECTION ===== */
+.login-section{
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:40px;
+  z-index:2;
+}
+
+.login-card{
+  width:100%;
+  max-width:450px;
+  background:var(--glass);
+  backdrop-filter:blur(25px);
+  padding:50px;
+  border-radius:24px;
+  border:1px solid var(--border);
+  box-shadow:0 50px 100px -20px rgba(0,0,0,0.5);
+  text-align:center;
+  animation:fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(20px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+/* ===== LOGO ===== */
+.logo{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  margin-bottom:20px;
+}
+
+.app-logo{
+  width:38px;
+  height:38px;
+  object-fit:contain;
+}
+
+.logo span{
+  font-weight:800;
+  font-size:1.6rem;
+}
+
+.logo b{
+  color:var(--accent-blue);
+}
+
+/* ===== PROFILE ===== */
+.profile-upload{
+  position:relative;
+  width:100px;
+  height:100px;
+  margin:0 auto 30px;
+}
+
+.profile-preview{
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  object-fit:cover;
+  border:3px solid var(--accent-blue);
+  padding:4px;
+  background:var(--bg-slate);
+}
+
+.upload-trigger{
+  position:absolute;
+  bottom:0;
+  right:0;
+  background:var(--accent-blue);
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  border:2px solid var(--bg-deep);
+  transition:var(--transition);
+}
+
+/* ===== FORM ===== */
+h2{margin-bottom:35px;font-weight:700;}
+
+.input-group{margin-bottom:16px;}
+
+input{
+  width:100%;
+  padding:14px 20px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:rgba(2,6,23,0.5);
+  color:white;
+  outline:none;
+}
+
+.btn-submit{
+  width:100%;
+  padding:16px;
+  border:none;
+  border-radius:12px;
+  background:var(--accent-blue);
+  color:white;
+  font-weight:700;
+  cursor:pointer;
+  margin-top:10px;
+}
+
+.divider{
+  display:flex;
+  align-items:center;
+  margin:30px 0;
+  font-size:0.75rem;
+  color:var(--text-muted);
+}
+
+.divider::before, .divider::after{
+  content:"";
+  flex:1;
+  height:1px;
+  background:var(--border);
+  margin:0 15px;
+}
+
+/* ===== VISUAL PANEL ===== */
+.visual-panel{
+  flex:1.2;
+  background:var(--bg-slate);
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.hidden{display:none;}
+
+@media(max-width:1024px){
+  .visual-panel{display:none;}
+  .top-nav { right: 50%; transform: translateX(50%); width: 100%; justify-content: center; top: 15px; }
+}
+</style>
+</head>
+
+<body>
+
+<nav class="top-nav">
+  <a href="about.html">ℹ About</a>
+  <a href="contract.html">📞 Contact</a>
+  <a href="admin.html" class="admin-link">🔐 Admin Login</a>
+</nav>
+
+<div class="container">
+  <div class="login-section">
+    <div class="login-card">
+      <div class="logo">
+        <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="ReClaim Logo" class="app-logo">
+        <span>Re<b>Claim</b> It</span>
+      </div>
+
+      <h2>User Login</h2>
+
+      <div class="profile-upload">
+        <img id="profileDisplay"
+             src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+             class="profile-preview">
+        <label for="profileInput" class="upload-trigger">+</label>
+        <input id="profileInput" type="file" accept="image/*" class="hidden">
+      </div>
+
+      <div class="divider">Credential Access</div>
+
+      <div class="input-group">
+        <input id="username" placeholder="Username">
+      </div>
+      <div class="input-group">
+        <input id="password" type="password" placeholder="Password">
+      </div>
+      <div class="input-group">
+        <input id="phone" placeholder="Mobile (10 Digits)" maxlength="10">
+      </div>
+
+      <button id="sendBtn" class="btn-submit">Send Access Code</button>
+
+      <div id="otpBox" class="hidden" style="margin-top:15px;">
+        <input id="otp" placeholder="Enter Security Code" style="text-align:center;">
+        <button class="btn-submit"
+                style="background:var(--accent-green);"
+                onclick="verifyLogin()">Verify & Authorize</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="visual-panel">
+    <div style="z-index:10;text-align:center;padding:40px;">
+      <h3 style="font-size:2.5rem;">Protecting Your<br>Digital Identity</h3>
+      
+      <p style="color:var(--text-muted);max-width:400px;margin-top:20px;">
+        Advanced item-matching algorithms and secure data encryption protect every reclaim.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+let demoOTP="";
+
+// Profile Image Preview Logic
+document.getElementById("profileInput").addEventListener("change",e=>{
+  const f=e.target.files[0];
+  if(!f)return;
+  const r=new FileReader();
+  r.onload=()=>document.getElementById("profileDisplay").src=r.result;
+  r.readAsDataURL(f);
+});
+
+// Mock Login Logic
+document.getElementById("sendBtn").onclick=()=>{
+  const u=username.value.trim();
+  const p=password.value.trim();
+  const ph=phone.value.trim();
+
+  if(!u||!p||ph.length!==10){
+    alert("Validation Error: Please check your credentials.");
+    return;
+  }
+
+  if(u!=="vijay"||p!=="123"){
+    alert("Access Denied: Invalid Username or Password");
+    return;
+  }
+
+  // Simulate OTP
+  demoOTP=Math.floor(1000+Math.random()*9000).toString();
+  alert("SECURITY CODE: "+demoOTP);
+  otpBox.classList.remove("hidden");
+  document.getElementById("sendBtn").style.display="none";
+};
+
+function verifyLogin(){
+  if(otp.value===demoOTP){
+    window.location.href="dashboard.html";
+  }else{
+    alert("Invalid Security Code");
+  }
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ReClaim It | Secure Admin Access</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-main: #020617;
+            --bg-secondary: #0F172A;
+            --card-bg: rgba(30, 41, 59, 0.6);
+            --accent: #3B82F6;
+            --accent-glow: rgba(59, 130, 246, 0.3);
+            --text: #F8FAFC;
+            --muted: #94A3B8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+
+        body {
+            min-height: 100vh;
+            background-color: var(--bg-main);
+            color: var(--text);
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* LAYOUT */
+        .admin-wrapper {
+            display: flex;
+            width: 100%;
+        }
+
+        /* LEFT SIDE: LOGIN FORM */
+        .login-section {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            z-index: 2;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 400px;
+            background: var(--card-bg);
+            backdrop-filter: blur(25px);
+            padding: 50px 40px;
+            border-radius: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        .shield-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--accent-glow);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--accent);
+        }
+
+        .login-card h2 { font-size: 26px; font-weight: 700; margin-bottom: 8px; }
+        .login-card p { color: var(--muted); font-size: 14px; margin-bottom: 30px; }
+
+        /* INPUTS */
+        .input-group { position: relative; margin-bottom: 20px; text-align: left; }
+        .input-group label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 8px; font-weight: 600; text-transform: uppercase; }
+        
+        input {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: white;
+            outline: none;
+            transition: 0.3s ease;
+        }
+
+        input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px var(--accent-glow);
+        }
+
+        /* BUTTON */
+        .btn-login {
+            width: 100%;
+            padding: 16px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn-login:hover {
+            background: #2563EB;
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px -10px var(--accent-glow);
+        }
+
+        /* RIGHT SIDE: BRANDING */
+        .visual-section {
+            flex: 1.2;
+            position: relative;
+            background: linear-gradient(135deg, #1e3a8a 0%, #020617 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .visual-section::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80') center/cover;
+            opacity: 0.2;
+            mix-blend-mode: overlay;
+        }
+
+        .brand-overlay {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .brand-overlay h1 { font-size: 48px; font-weight: 800; letter-spacing: -1px; }
+        .brand-overlay h1 b { color: var(--accent); }
+
+        /* MOBILE FIX */
+        @media (max-width: 1024px) {
+            .visual-section { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="admin-wrapper">
+    <section class="login-section">
+        <div class="login-card">
+            <div class="shield-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </div>
+            <h2>Admin Access</h2>
+            <p>Enter your credentials to manage the portal.</p>
+
+            <div class="input-group">
+                <label>Admin ID</label>
+                <input type="text" id="adminUser" placeholder="e.g. vijay" autocomplete="off">
+            </div>
+
+            <div class="input-group">
+                <label>Security Key</label>
+                <input type="password" id="adminPass" placeholder="••••••••">
+            </div>
+
+            <button class="btn-login" onclick="adminLogin()">Authenticate</button>
+            
+            <div style="margin-top: 25px; font-size: 12px; color: var(--muted);">
+                Protected by ReClaim Smart Security &copy; 2026
+            </div>
+        </div>
+    </section>
+
+    <section class="visual-section">
+        <div class="brand-overlay">
+            <h1>Re<b>Claim</b> It</h1>
+            <p style="color: var(--muted); margin-top: 10px; font-size: 18px;">Unified Administrative Command Center</p>
+        </div>
+    </section>
+</div>
+
+
+
+<script>
+    // Allow login by pressing Enter
+    document.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            adminLogin();
+        }
+    });
+
+    function adminLogin() {
+        const u = document.getElementById("adminUser").value.trim();
+        const p = document.getElementById("adminPass").value.trim();
+
+        if (!u || !p) {
+            showError("Fields cannot be empty");
+            return;
+        }
+
+        // Using your requested credentials
+        if (u === "p" && p === "123") {
+            const btn = document.querySelector('.btn-login');
+            btn.innerHTML = "Verifying...";
+            btn.style.background = "#10B981";
+            
+            setTimeout(() => {
+                window.location.href = "item.html"; // Redirects to the smart item report
+            }, 800);
+        } else {
+            showError("Access Denied: Invalid Credentials");
+        }
+    }
+
+    function showError(msg) {
+        alert(msg); // You can replace this with a toast notification later
+    }
+</script>
+
+</body>
+</html>
